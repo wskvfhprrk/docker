@@ -1,0 +1,28 @@
+FROM centos:7
+
+#安装openssh-server
+RUN yum -y install openssh-server openssh-clients
+RUN /usr/sbin/sshd-keygen -A
+
+#变更root密码为123456
+RUN echo "root:123456"|chpasswd
+
+
+ADD conf /usr
+WORKDIR /usr/conf
+
+#拷贝并解压jdk
+RUN tar -zxvf jdk-8u171-linux-x64.tar.gz
+RUN mv jdk1.8.0_171 /user/java
+RUN rm -f jdk-8u171-linux-x64.tar.gz
+
+#设置环境变量
+ENV JAVA_HOME /usr/java
+ENV PATH $PATH:$JAVA_HOME/bin
+
+
+#开放窗口的22端口
+EXPOSE 22
+
+#运行脚本，启动sshd服务
+CMD ["/usr/sbin/sshd", "-D"] 

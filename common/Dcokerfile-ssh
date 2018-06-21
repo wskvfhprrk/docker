@@ -1,0 +1,12 @@
+FROM centos:7
+
+##安装ssh和passwd
+RUN yum install openssh-server openssh-clients passwd -y 
+RUN	/usr/sbin/sshd-keygen -A 
+RUN	passwd root
+RUN 123456
+RUN 123456
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd","-D"]	

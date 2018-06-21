@@ -1,0 +1,129 @@
+docker run -it centos /bin/bash
+
+sudo mkdir -p /usr/local/docker/nginx
+sudo mkdir -p /usr/local/docker/tomcat
+sudo mkdir -p /usr/local/docker/mysql
+sudo mkdir -p /usr/local/docker/jdk
+sudo mkdir -p /usr/local/docker/redis
+
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://9npe1wqt.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+
+#添加防火墙
+firewall-cmd --zone=public --add-port=8090/tcp --permanent  
+#重启
+systemctl restart firewalld.service
+
+
+#docker 远程访问端口2375
+docker -H tcp://192.168.1.122:2375 images
+
+#搭建私有仓库
+docker run --name registry -d -p 5000:5000 registry
+#docker run --name registry -d -p 5000:5000 -v /opt/data/registry:/tmp/registry registry
+
+
+#容器
+mkdir -p /usr/local/tomcat
+mkdir -p /usr/local/jdk
+
+#docker的maven私服
+docker pull sonatype/nexus
+#docker volume create --name docker-data
+#docker run -d -p 10081:8081 --name nexus -v docker-data:/nexus-data sonatype/nexus:latest
+mkdir /usr/local/docker/nexus/docker-data
+docker run -d -p 10081:8081 --name nexus -v /usr/local/docker/nexus/docker-data:/nexus-data sonatype/nexus:latest
+ 
+
+#mysql
+docker pull mysql
+#docker run --name mysql -p 3306:3306 -e MYSQL\_ROOT\_PASSWORD=123456 -d 
+#创建mysql数据卷目录/usr/local/docker/mysql/data
+mkdir -p /usr/local/docker/mysql/data
+#docker mysql命令
+docker run --name mysql -v /usr/local/docker/mysql/data:/var/lib/mysql -p 3306:3306 -e MYSQL\_ROOT\_PASSWORD=123456 -d mysql:5.5
+
+#redis 
+docker pull redis
+docker run -d -p 6379:6379 --name redis redis:latest
+#docker 默认密码为空,可以使用redis客户端设置密码:yourPassword
+config set requirepass yourPassword
+
+
+
+#下载所需要的镜像文件
+docker pull nginx
+docker pull tomcat:7.0.79
+
+
+#使用Dockerfile建立新的镜象jjmf/nginx:1.0
+docker build -t jjmf/nginx:1.0 .
+docker build -t jjmf/nginx:2.0 .
+
+
+#centos开启远程访问：http://blog.csdn.net/faryang/article/details/75949611
+
+#以nginx命名的映射为80端口的服务器启动
+docker run --name nginx -d -p 80:80 jjmf/nginx:1.0
+docker run --name nginx -d -p 80:80 jjmf/nginx:2.0
+
+
+#静态资源区
+docker run --name nginx8080 -v /usr/local/docker/nginx8080:/usr/share/nginx/html:ro -d -p 8080:80 nginx:latest
+
+
+#停止nginx的docker服务
+docker stop nginx
+
+#启动nginx的docker服务
+docker stop nginx
+
+##############################################
+#使用Dockerfile建立新的镜象tomcat:1.0
+docker build -t tomcat:1.0 .
+
+##############################
+docker run -p 6379:6379 --name redis -d redis 
+
+linux重启后要修改redis密码
+CONFIG SET requirepass "123456"
+AUTH 123456
+
+
+#远程下载并运行tomcat:7.0.79
+
+docker run -it --rm -p 8888:8080 tomcat:8.0
+
+docker run -v /usr/local/docker/tomcat/tomcat8080/webapps:/usr/local/tomcat/webapps --name tomcat8080 -d -p 8080:8080 tomcat:1.0
+
+docker run -v /usr/local/docker/tomcat/tomcat8888/webapps:/usr/local/tomcat/webapps --name tomcat8888 -d -p 8888:8080 tomcat:1.0
+
+docker run --name tomcat8081 -d -p 8081:8080 tomcat:2.0
+
+
+docker run --name tomcat8080 -d -p 8080:8080 jjmf/tomcat:1.0
+docker run --name tomcat8081 -d -p 8081:8080 tomcat:1.0
+docker run --name tomcat8082 -d -p 8082:8080 tomcat:1.0
+docker run --name tomcat8083 -d -p 8083:8080 tomcat:1.0
+docker run --name tomcat8084 -d -p 8084:8080 tomcat:1.0
+docker run --name tomcat8085 -d -p 8085:8080 tomcat:1.0
+docker run --name tomcat8086 -d -p 8086:8080 tomcat:1.0
+docker run --name tomcat8087 -d -p 8087:8080 tomcat:1.0
+docker run --name tomcat8088 -d -p 8088:8080 tomcat:1.0
+docker run --name tomcat8089 -d -p 8089:8080 tomcat:1.0
+
+...............
+
+#停止nginx的tomcat8080服务
+docker stop tomcat8080
+
+#启动nginx的tomcat8080服务
+docker start tomcat8080
+
+docker run -d  --name rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management

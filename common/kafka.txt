@@ -1,0 +1,6 @@
+{"database":"test","table":"qqqq","type":"insert","ts":1528819346,"xid":1680,"commit":true,"data":{"qwre":"234","qweqqq":"234"}}
+{"database":"test","table":"qqqq","type":"delete","ts":1528819712,"xid":1857,"commit":true,"data":{"qwre":"123","qweqqq":"11111"}}
+{"database":"test","table":"qqqq","type":"insert","ts":1528820680,"xid":2060,"commit":true,"data":{"qwre":"2342","qweqqq":"222"}}
+{"database":"test","table":"qqqq","type":"delete","ts":1528820722,"xid":2072,"commit":true,"data":{"qwre":"2342","qweqqq":"222"}}
+{"database":"test","table":"qqqq","type":"update","ts":1528820729,"xid":2074,"commit":true,"data":{"qwre":"234","qweqqq":"234213"},"old":{"qweqqq":"234"}}
+{"database":"test","table":"qqqq","type":"update","ts":1528820851,"xid":2101,"commit":true,"data":{"qwre":"2341","qweqqq":"23421"},"old":{"qwre":"234","qweqqq":"234213"}}

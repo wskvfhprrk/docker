@@ -1,0 +1,32 @@
+
+#maxwells与kafka
+###注意：docker容器内运行不能写127.0.0.1或者localhost
+##########前台运行
+docker run -it --rm zendesk/maxwell bin/maxwell --user=root \
+--password=123456 --host=192.168.22.129 --producer=kafka \
+--kafka.bootstrap.servers=192.168.22.129:9092 --kafka_topic=test
+##########dockerp容器运行
+docker run -d --rm zendesk/maxwell bin/maxwell --user=root \
+--password=123456 --host=192.168.22.129 --producer=kafka \
+--kafka.bootstrap.servers=192.168.22.129:9092 --kafka_topic=test
+
+########先进入kafka目录后，运行可监控是否有数据传入topic:test
+bin/kafka-console-consumer.sh --bootstrap-server 192.168.22.129:9092 --topic test --from-beginning
+
+
+
+#maxwells与rabbitmq-------------------目前无法测试
+
+docker run -it --rm zendesk/maxwell bin/maxwell --user=$MYSQL_USERNAME \
+    --password=$MYSQL_PASSWORD --host=$MYSQL_HOST --producer=rabbitmq --rabbitmq_host='rabbitmq.hostname'
+
+
+docker run -d --rm zendesk/maxwell bin/maxwell --user=root \
+--password=123456 --host=192.168.22.129 --producer=rabbitmq --rabbitmq_host=192.168.22.129 
+	
+docker run -it --rm zendesk/maxwell bin/maxwell --user=root \
+--password=123456 --host=192.168.22.129 --producer=rabbitmq --rabbitmq_host=192.168.22.129 
+
+
+docker run -ti --rm zendesk/maxwell bin/maxwell --user='root' --password='123456' --host='192.168.22.129' --producer=stdout
+
