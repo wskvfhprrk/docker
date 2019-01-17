@@ -12,7 +12,9 @@
 
 `docker ps`或 `docker ps -a`
 
+#### docker时区同步
 
+` docker run --name <name> -v /etc/localtime:/etc/localtime:ro  .... `
 
 #### mysql数据库
 
