@@ -61,3 +61,9 @@ $ docker run -d -p 10081:8081 --name nexus -v nexus-data:/nexus-data sonatype/ne
 ```
 docker run -d  --name rabbit -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_USER=root -e RABBITMQ_DEFAULT_PASS=123456 rabbitmq:3-management
 ```
+#### docker 本地镜像仓库
+```
+mkdir -p /opt/data/registry  //创建目录
+sudo docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry 
+      --name private_registry registry  //启动容器
+```
