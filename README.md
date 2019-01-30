@@ -64,6 +64,5 @@ docker run -d  --name rabbit -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_USE
 #### docker 本地镜像仓库
 ```
 mkdir -p /opt/data/registry  //创建目录
-sudo docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry 
-      --name private_registry registry  //启动容器
+sudo docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry  --name private_registry registry  //启动容器
 ```
