@@ -67,9 +67,13 @@ mkdir -p /opt/data/registry  //创建目录
 sudo docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry  --name private_registry registry  //启动容器
 ```
 因为Docker从1.3.X之后，与docker registry交互默认使用的是https，然而此处搭建的私有仓库只提供http服务，所以当与私有仓库交互时就会报上面的错误。为了解决这个问题需要在启动docker server时增加启动参数为默认使用http访问。修改docker启动配置文件：
+
 `vim  /usr/lib/systemd/system/docker.service`
+
 找到 ExecStart
-`ExecStart=/usr/bin/dockerd  **--insecure-registry 192.168.0.153:5000**`
+
+`ExecStart=/usr/bin/dockerd  --insecure-registry 192.168.0.153:5000`
+
 重启docker
 ```
 systemctl daemon-reload
