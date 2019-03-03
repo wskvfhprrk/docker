@@ -79,4 +79,7 @@ sudo docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry  --name 
 systemctl daemon-reload
 systemctl restart docker
 ```
-
+####redis
+```
+docker run --name redis -d -p 6379:6379 redis redis-server --appendonly yes
+```
