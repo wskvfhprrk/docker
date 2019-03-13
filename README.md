@@ -34,7 +34,7 @@ docker run --name mysql -v \
 -p 3306:3306 \
 -e MYSQL\_ROOT\_PASSWORD=123456 -d mysql:5.7
 ```
-###windows docker mysql
+#### windows docker mysql
 ```
 docker run --name mysql -p 3306:3306 -v /d/mysql_data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
 ```
