@@ -83,3 +83,7 @@ systemctl restart docker
 ```
 docker run --name redis -d -p 6379:6379 redis redis-server --appendonly yes
 ```
+####建立直播流服务器
+```
+docker run -d -p 1935:1935 -p 80:80 -v /opt/nginx/html/:/opt/nginx/html/ --rm alfg/nginx-rtmp
+```
