@@ -74,16 +74,16 @@ sudo docker run -d -p 5000:5000 -v /opt/data/registry:/var/lib/registry  --name 
 
 `ExecStart=/usr/bin/dockerd  --insecure-registry 192.168.166.186:5000`
 
-重启docker
+#### 重启docker
 ```
 systemctl daemon-reload
 systemctl restart docker
 ```
-####redis
+#### redis
 ```
 docker run --name redis -d -p 6379:6379 redis redis-server --appendonly yes
 ```
-####建立直播流服务器
+#### 建立直播流服务器
 ```
 docker run -d -p 1935:1935 -p 80:80 -v /opt/nginx/html/:/opt/nginx/html/ --rm alfg/nginx-rtmp
 ```
