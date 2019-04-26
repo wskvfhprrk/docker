@@ -87,3 +87,16 @@ docker run --name redis -d -p 6379:6379 redis redis-server --appendonly yes
 ```
 docker run -d -p 1935:1935 -p 80:80 -v /opt/nginx/html/:/opt/nginx/html/ --rm alfg/nginx-rtmp
 ```
+#### docker容器内部安装软件
+```
+FROM frolvlad/alpine-oraclejdk8
+COPY target/*.jar app.jar
+EXPOSE 8080
+#使用上海时间为零时区
+RUN echo "Asia/Shanghai" > /etc/timezone
+#使用使用aplache-linux安装源文件
+RUN  apk add php7 --repository http://nl.alpinelinux.org/alpine/edge/testing/
+#使用apk add并安装zip
+RUN apk add zip
+ENTRYPOINT ["java","-jar","/app.jar"]
+```
