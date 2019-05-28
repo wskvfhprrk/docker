@@ -45,23 +45,5 @@ services:
   #   volumes: 
   #     - /var/fdfs/storage2:/var/fdfs         
 ```
-`docker-compose up -d`启动容器后需要修改容器tracker里nginx配置`conf.d——tracker.conf`：
-```
-upstream fdfs {
-    #需要主机防火墙打开此端口访问
-    server storage:8080;
-}
-server {
-    listen       80 ;
-    # server_name  _ ;
-    location / {
-        root   html;
-        index  index.html index.htm;
-        proxy_pass http://fdfs;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
-
-}
-```
+`docker-compose up -d`启动容器后，只需要打开防火墙8080和22122端口即可，8080是图片访问端口，22122是后台图片上传端口
+需要修改访问端口，修改容器tracker里nginx配置
