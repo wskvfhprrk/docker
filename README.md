@@ -100,3 +100,9 @@ RUN  apk add php7 --repository http://nl.alpinelinux.org/alpine/edge/testing/
 RUN apk add zip
 ENTRYPOINT ["java","-jar","/app.jar"]
 ```
+
+### shadowsocks
+
+```
+docker run -e PASSWORD=1978106hjz -p 8388:8388 -p 8388:8388/udp -d --name shadowsocks shadowsocks/shadowsocks-libev
+```
