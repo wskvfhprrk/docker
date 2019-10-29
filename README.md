@@ -105,7 +105,9 @@ ENTRYPOINT ["java","-jar","/app.jar"]
 
 ```
 yum install -y
-yum install docker
+yum install docker -y
 systemctl start docker
 docker run -e PASSWORD=1978106hjz -p 8388:8388 -p 8388:8388/udp -d --name shadowsocks shadowsocks/shadowsocks-libev
+
+docker run -d -p 12345:12345 oddrationale/docker-shadowsocks -s 0.0.0.0 -p 12345 -k 1978106hjz -m aes-256-cfb
 ```
