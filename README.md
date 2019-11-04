@@ -112,3 +112,8 @@ docker run -e PASSWORD=1978106hjz -p 8388:8388 -p 8388:8388/udp -d --name shadow
 
 docker run -d -p 12345:12345 oddrationale/docker-shadowsocks -s 0.0.0.0 -p 12345 -k 1978106hjz -m aes-256-cfb
 ```
+
+### elasticsearch
+```
+docker run -d -p 9200:9200 -p 9300:9300 --name elasticsearch elasticsearch:2.4.4
+```
