@@ -36,13 +36,13 @@ docker run --name mysql -v \
 ```
 #### windows docker mysql
 ```
-docker run --name mysql -p 3306:3306 -v /d/mysql_data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+docker run --restart=always --name mysql -p 3306:3306 -v /d/mysql_data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
 ```
 
 如果`/my/custom/config-file.cnf`是自定义配置文件的路径和名称，则可以`mysql`像这样启动容器（请注意，此命令中仅使用自定义配置文件的目录路径）：
 
 ```
-docker run --restart=always d --name some-mysql -v /my/custom:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+docker run  d --name some-mysql -v /my/custom:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
 ```
 
 这将启动一个新容器`some-mysql`，其中MySQL实例使用组合的启动设置，`/etc/mysql/my.cnf`并且`/etc/mysql/conf.d/config-file.cnf`后者的设置优先。
