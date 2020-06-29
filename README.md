@@ -59,7 +59,7 @@ $ docker run -d -p 10081:8081 --name nexus -v nexus-data:/nexus-data sonatype/ne
 ```
 #### rabbit
 ```
-docker run -d  --name rabbit -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_USER=root -e RABBITMQ_DEFAULT_PASS=123456 rabbitmq:3-management
+docker run --restart=always -d  --name rabbit -p 15672:15672 -p 5672:5672 -e RABBITMQ_DEFAULT_USER=root -e RABBITMQ_DEFAULT_PASS=123456 rabbitmq:3-management
 ```
 #### docker 本地镜像仓库
 ```
@@ -81,7 +81,7 @@ systemctl restart docker
 ```
 #### redis
 ```
-docker run --name redis -d -p 6379:6379 redis redis-server --appendonly yes
+docker run --restart=always --name redis -d -p 6379:6379 redis redis-server --appendonly yes
 ```
 #### 建立直播流服务器
 ```
