@@ -115,5 +115,5 @@ docker run -d -p 12345:12345 oddrationale/docker-shadowsocks -s 0.0.0.0 -p 12345
 
 ### elasticsearch
 ```
-docker run -d -p 9200:9200 -p 9300:9300 --name elasticsearch elasticsearch:2.4.4
+docker run -d -p 9200:9200 -p 9300:9300 --restart=always --name elasticsearch elasticsearch:7.6.2
 ```
