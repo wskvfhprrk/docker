@@ -114,6 +114,13 @@ docker run -d -p 12345:12345 oddrationale/docker-shadowsocks -s 0.0.0.0 -p 12345
 ```
 
 ### elasticsearch
+创建用户定义的网络（用于连接到连接到同一网络的其他服务（例如，Kibana））
 ```
-docker run -d -p 9200:9200 -p 9300:9300 --restart=always --name elasticsearch elasticsearch:7.6.2
+docker network create somenetwork
+```
+```docker run -d --name elasticsearch --net somenetwork -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.6.2
+```
+再安装Kibana
+```
+docker run -d --name kibana --net somenetwork -p 5601:5601 kibana:7.6.2
 ```
