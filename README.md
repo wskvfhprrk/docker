@@ -11,6 +11,9 @@
 查看命令
 
 `docker ps`或 `docker ps -a`
+### docker镜像的导入导出（不使用网络）
+导出镜像文件`docker save -o /路径名/文件名.tar.gz 镜像名称`
+导入镜像文件`docker load < /路径名/文件名.tar.gz`
 
 #### docker时区同步
 
