@@ -16,6 +16,16 @@
 ```
 docker save -o /路径名/文件名.tar.gz 镜像名称
 ```
+### 删除所有未运行的容器（已经运行的删除不了，未运行的就一起被删除了）
+```
+docker rm $(sudo docker ps -a -q)
+```
+### docker删除未使用到的镜像
+```
+docker image prune -a
+docker image prune -a -f 　　#-f强制，不需要确认
+```
+
 
 导入镜像文件
 ```
