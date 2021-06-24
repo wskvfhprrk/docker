@@ -48,7 +48,7 @@ mkdir -p /usr/local/docker/mysql/conf
 docker mysql命令----------密码为123456,端口号为3306 配置文件放在/usr/local/docker/mysql/conf下:conf.d和my.conf
 
 ```
-docker run --name mysql -v \
+docker run --restart=always --name mysql -v \
 /usr/local/docker/mysql/data:/var/lib/mysql \
 -v /usr/local/docker/mysql/conf:/etc/mysql \
 -p 3306:3306 \
