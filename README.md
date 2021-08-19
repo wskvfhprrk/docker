@@ -149,3 +149,13 @@ docker run -d --name elasticsearch --net somenetwork -p 9200:9200 -p 9300:9300 -
 ```
 docker run -d --name kibana --net somenetwork -p 5601:5601 kibana:7.6.2
 ```
+
+### mac minio
+```
+ docker run -p 9000:9000 --name minio1 \
+  -e "MINIO_ACCESS_KEY=root" \
+  -e "MINIO_SECRET_KEY=Abc123456" \
+  -v /Users/hejianzhe/.minio/data:/data \
+  -v /Users/hejianzhe/.minio/config:/root/.minio \
+  minio/minio server /data
+```
