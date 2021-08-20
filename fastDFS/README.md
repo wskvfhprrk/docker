@@ -21,7 +21,7 @@ services:
     command: storage
     network_mode: host  
     environment:
-      - TRACKER_SERVER=192.168.166.183:22122
+      - TRACKER_SERVER=127.0.0.1:22122
     volumes: 
       - /var/fdfs/storage0:/var/fdfs
   # storage1:
