@@ -21,7 +21,8 @@ services:
     command: storage
     network_mode: host  
     environment:
-      - TRACKER_SERVER=127.0.0.1:22122
+    #TRACKER_SERVER不能为127.0.0.1
+      - TRACKER_SERVER=192.168.5.185:22122
     volumes: 
       - /var/fdfs/storage0:/var/fdfs
   # storage1:
@@ -46,4 +47,4 @@ services:
   #     - /var/fdfs/storage2:/var/fdfs         
 ```
 `docker-compose up -d`启动容器后，只需要打开防火墙8080和22122端口即可，8080是图片访问端口，22122是后台图片上传端口
-需要修改访问端口，修改容器tracker里nginx配置,`TRACKER_SERVER`应写本地ip，不要`localhost`
+需要修改访问端口，修改容器tracker里nginx配置,`TRACKER_SERVER`应写本地ip，不要`localhost`或者`127.0.0.1`
