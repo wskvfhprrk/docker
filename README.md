@@ -30,6 +30,7 @@ docker image prune -a -f 　　#-f强制，不需要确认
 docker run -d --name hbase_container -p 2181:2181 -p 16010:16010 -p 16000:16000 -p 16020:16020 -p 16030:16030 -v $(pwd)/hbase_data:/hbase-data harisekhon/hbase
 ```
 访问：
+
 *Web UI 页面:http://localhost:16010
 * HMaster 页面：http://localhost:16000
 * RegionServer 页面：http://localhost:16030
