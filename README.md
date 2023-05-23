@@ -31,7 +31,7 @@ docker run -d --name hbase_container -p 2181:2181 -p 16010:16010 -p 16000:16000 
 ```
 访问：
 
-*Web UI 页面:http://localhost:16010
+* Web UI 页面:http://localhost:16010
 * HMaster 页面：http://localhost:16000
 * RegionServer 页面：http://localhost:16030
 
