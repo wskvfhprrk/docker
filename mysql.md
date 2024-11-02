@@ -8,17 +8,19 @@
 ```sh
 docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:8.0
 ```
-### 进入 Docker 容器内部
+### 进入 Docker 容器内部查看mysql配置（可省略）
 ```sh
-docker exec -it <容器ID或名称> /bin/bash
+docker exec -it some-mysql /bin/bash
 ```
+配置在目录`/var/lib/mysql`下，退出容器进入宿主机使用`exit`指令即可
 ### 从容器中拷贝出配置文件到宿主机目录中
+进入宿主机目录`/usr/local/docker/`中进行拷贝
 ```sh
-docker cp <容器ID或名称>:<容器内路径> ./
+docker cp some-mysql:/var/lib/mysql ./
 ```
 ### 删除运行的mysql容器
 ```sh
-docker rm -f <容器ID或名称>
+docker rm -f  some-mysql
 ```
 ### 运行容器
 ```sh
